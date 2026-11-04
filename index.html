@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<!-- La línea de arriba (<!DOCTYPE html>) le dice al navegador que este archivo es HTML5, la versión actual de HTML. Siempre va de primera. -->
+
+<!--
+  =====================================================================
+  INDEX.HTML  →  El "esqueleto" de la página web "Bosa respira"
+  ---------------------------------------------------------------------
+  Proyecto: Contaminación ambiental en Bosa (Bogotá)
+  Autor: Jhoel Steven Alfonso Rodriguez
+
+  El proyecto tiene 3 tipos de archivo, cada uno con un trabajo:
+    - index.html      → QUÉ hay en la página (textos, títulos, fotos, tablas)
+    - css/estilos.css → CÓMO se ve (colores, letras, tamaños, posiciones)
+    - js/juego.js     → QUÉ HACE (el juego Eco Vuela)
+    - img/            → las imágenes del juego (pájaro, vapeador, humo, fondo)
+
+  ¿Qué es una ETIQUETA? HTML se escribe con etiquetas entre < >.
+  Casi todas se abren y se cierran:
+      <p>Esto es un párrafo</p>
+       ↑ abre             ↑ cierra (lleva /)
+
+  Las etiquetas pueden tener ATRIBUTOS que dan información extra:
+      <a href="#juego">Jugar</a>      → href = a dónde lleva el enlace
+      <div class="card">              → class = nombre para darle estilo en el CSS
+      <canvas id="ecoCanvas">         → id = nombre ÚNICO para encontrarlo desde JavaScript
+
+  Todo este texto es un COMENTARIO: el navegador lo ignora, solo sirve
+  para que las personas entiendan el código. Un comentario en HTML se
+  abre con  < ! - -  y se cierra con  - - >  (todo junto, sin espacios).
+  En VS Code se ven en color gris o verde.
+  =====================================================================
+-->
+
+
+<!-- <html> envuelve TODA la página. lang="es" = la página está en español -->
+<html lang="es">
+
+<!-- =====================================================================
+     <head> = la "cabeza": información SOBRE la página.
+     Casi nada de lo que va aquí se ve dentro de la página.
+     ===================================================================== -->
+<head>
+  <!-- UTF-8 permite mostrar bien las tildes, la ñ y los emojis -->
+  <meta charset="UTF-8">
+
+  <!-- Hace que la página se adapte al tamaño del celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Descripción corta que usan buscadores como Google -->
+  <meta name="description" content="Trabajo escolar sobre la contaminación ambiental en Bosa, Bogotá: causas, consecuencias y soluciones.">
+
+  <!-- El texto que aparece en la PESTAÑA del navegador -->
+  <title>Bosa respira | Cuidemos nuestro territorio</title>
+
+  <!-- Tipos de letra traídos de Google Fonts (internet):
+       "DM Sans" para los textos y "Playfair Display" para los títulos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Conecta este HTML con el archivo de estilos (CSS) -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+
+<!-- =====================================================================
+     <body> = el "cuerpo": TODO lo que se VE en la página.
+     ===================================================================== -->
+<body>
+
+  <!-- ===================================================================
+       MENÚ DE NAVEGACIÓN (la barra de arriba)
+       <nav> = zona de navegación.
+       Cada <a href="#algo"> es un enlace que baja hasta la sección
+       que tiene id="algo". Ej.: href="#causas" lleva a <section id="causas">
+       =================================================================== -->
+  <nav>
+    <div class="brand">🌿 BOSA RESPIRA</div>
+    <div>
+      <a href="#problema">El problema</a>
+      <a href="#causas">Causas</a>
+      <a href="#investigacion">Investigación</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#juego">Jugar</a>
+    </div>
+  </nav>
+
+
+  <!-- ===================================================================
+       PORTADA (hero): título grande, texto, botón y foto
+       <header> = encabezado / parte de presentación.
+       =================================================================== -->
+  <header class="hero">
+
+    <!-- Columna izquierda: los textos -->
+    <div>
+      <div class="eyebrow">Medio ambiente · Bogotá, Colombia</div>
+
+      <!-- <h1> = el título MÁS importante de la página (solo debe haber uno).
+           <br> = salto de línea.
+           <span> = sirve para darle un estilo diferente a un pedazo de texto (aquí, verde) -->
+      <h1>Bosa merece<br><span>respirar mejor.</span></h1>
+
+      <!-- <p> = párrafo -->
+      <p>La contaminación ambiental afecta los ríos, el aire, los humedales y la calidad de vida de quienes habitan esta localidad. Conocer el problema es el primer paso para transformarlo.</p>
+
+      <!-- Botón (en realidad es un enlace <a> con forma de botón gracias al CSS) -->
+      <a class="cta" href="#problema">Conoce qué está pasando ↓</a>
+    </div>
+
+    <!-- Columna derecha: la foto -->
+    <div class="hero-photo">
+      <!-- <img> = imagen. No se cierra.
+           src = dirección de la imagen (aquí está en internet).
+           alt = descripción de la imagen (la leen los lectores de pantalla
+                 para personas ciegas, y aparece si la imagen no carga) -->
+      <img src="https://citytv.eltiempo.com/static/assets/backend/2025-04/WhatsApp%20Image%202025-04-03%20at%206.30.19%20AM.jpeg" alt="Residuos acumulados en un río urbano de Bogotá">
+      <div class="photo-note">🌎 Nuestro entorno necesita cuidado y compromiso.</div>
+    </div>
+  </header>
+
+
+  <!-- ===================================================================
+       SECCIÓN 01: EL PROBLEMA
+       <section> = una sección o bloque de la página.
+       id="problema" es el nombre al que apunta el enlace del menú.
+       =================================================================== -->
+  <section id="problema">
+
+    <!-- Encabezado de la sección: numerito, título <h2> y explicación -->
+    <div class="section-head">
+      <div class="eyebrow">01 · La pregunta principal</div>
+      <h2>¿Por qué sucede la contaminación ambiental en Bosa?</h2>
+      <p>No existe una sola causa. Es el resultado de diferentes actividades humanas, problemas de infraestructura y hábitos que, al acumularse, deterioran el entorno.</p>
+    </div>
+
+    <!-- Galería: una foto grande a la izquierda y dos a la derecha -->
+    <div class="photo-grid">
+
+      <!-- Foto grande -->
+      <div>
+        <img src="https://imagenes.eltiempo.com/files/og_thumbnail/uploads/2019/06/21/5d0ce82675019.jpeg" alt="Maquinaria retirando residuos del río Tunjuelo">
+        <p class="caption">Limpieza de residuos en el río Tunjuelo. Foto: El Tiempo.</p>
+      </div>
+
+      <!-- Las dos fotos de la derecha, una encima de la otra -->
+      <div class="photo-stack">
+        <div>
+          <img src="https://caracol.com.co/resizer/v2/VQVJYOGXX5HZZPPIWYTGNEC3CM.jpeg?auth=c5e11690598922dccaf935a77de0b9f4329bee20d9bd5692c759dfc09e995229&height=675&quality=70&smart=true&width=1200" alt="Personal de emergencia trabajando en una zona con residuos">
+          <p class="caption">Jornadas de recuperación del río Tunjuelito. Foto: Caracol Radio.</p>
+        </div>
+        <div>
+          <img src="https://www.semana.com/resizer/v2/2YYRRGZ7FRHMVESUQKLTVJQQFU.jpg?auth=5dfaca62bc0675d7630771ab00f8afdf781bf8b148c62d4df450f72a7bd1d66a&quality=75&smart=true&width=768" alt="Zona verde recuperada junto al río Tunjuelo">
+          <p class="caption">Un espacio ribereño recuperado con árboles en Bosa. Foto: Semana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       FRANJA VERDE OSCURA CON UNA PREGUNTA
+       style="..." = estilo escrito directamente en la etiqueta
+       (aquí solo cambia el color de este texto a verde limón).
+       =================================================================== -->
+  <div class="question">
+    <div class="eyebrow" style="color:#c8e6a0">Una realidad que podemos cambiar</div>
+    <h2>¿Qué está dañando nuestro ambiente?</h2>
+    <p>Los residuos arrojados a los cuerpos de agua, los vertimientos de aguas residuales, las emisiones de vehículos e industrias y la pérdida de zonas verdes son factores que requieren atención de la ciudadanía y de las autoridades.</p>
+  </div>
+
+
+  <!-- ===================================================================
+       SECCIÓN 02: CAUSAS
+       6 tarjetas. Cada <article class="card"> es una tarjeta blanca.
+       El CSS (.grid) las acomoda en 3 columnas.
+       =================================================================== -->
+  <section id="causas">
+    <div class="section-head">
+      <div class="eyebrow">02 · Motivos principales</div>
+      <h2>¿Cuáles son las causas?</h2>
+      <p>Entre los factores identificados en diagnósticos ambientales de Bosa y documentos distritales se encuentran:</p>
+    </div>
+
+    <div class="grid">
+      <!-- Tarjeta 1. Todas tienen la misma estructura: número, título <h3> y texto <p> -->
+      <article class="card">
+        <div class="number">1</div>
+        <h3>Basuras y escombros</h3>
+        <p>Arrojar bolsas, plásticos, muebles, llantas y residuos de construcción en calles, canales, rondas de ríos y humedales deteriora los ecosistemas y puede obstruir el drenaje.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">2</div>
+        <h3>Aguas residuales</h3>
+        <p>Los vertimientos domésticos e industriales sin tratamiento adecuado contaminan fuentes hídricas como los ríos Tunjuelo y Bogotá.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">3</div>
+        <h3>Emisiones al aire</h3>
+        <p>El tráfico de vehículos, especialmente de carga, algunas actividades industriales y las quemas generan gases y material particulado.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">4</div>
+        <h3>Pérdida de zonas verdes</h3>
+        <p>La ocupación y el deterioro de las rondas hídricas y los humedales reducen los espacios naturales que ayudan a regular el agua y albergar biodiversidad.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">5</div>
+        <h3>Malos hábitos ciudadanos</h3>
+        <p>La falta de separación de residuos, el abandono de basura y el uso inadecuado de canales y espacios públicos agravan el problema.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">6</div>
+        <h3>Control insuficiente</h3>
+        <p>Se necesita vigilancia constante, mantenimiento de infraestructura, educación ambiental y seguimiento a quienes realizan vertimientos o disposición ilegal de residuos.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       SECCIÓN 03: CONSECUENCIAS
+       4 tarjetas con un emoji a la izquierda y el texto a la derecha.
+       Esta sección no tiene id porque no está en el menú.
+       =================================================================== -->
+  <section class="impact">
+    <div class="section-head">
+      <div class="eyebrow">03 · Consecuencias</div>
+      <h2>¿Cómo nos afecta?</h2>
+      <p>La contaminación no solo daña el paisaje: también puede afectar la salud, la convivencia y el equilibrio de la naturaleza.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="emoji">🫁</div>
+        <div>
+          <h3>Salud de las personas</h3>
+          <p>El aire contaminado puede agravar problemas respiratorios. El agua contaminada y los residuos favorecen riesgos sanitarios.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="emoji">🐀</div>
+        <div>
+          <h3>Plagas y malos olores</h3>
+          <p>La acumulación de basura puede atraer roedores e insectos y generar olores desagradables.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="emoji">🐦</div>
+        <div>
+          <h3>Pérdida de biodiversidad</h3>
+          <p>La contaminación y el deterioro de humedales y riberas afectan los hábitats de aves, plantas y otras especies.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="emoji">🌧️</div>
+        <div>
+          <h3>Riesgo de inundaciones</h3>
+          <p>Los residuos que obstruyen canales y sistemas de drenaje pueden empeorar los encharcamientos y las inundaciones.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       SECCIÓN 04: INVESTIGACIÓN (la encuesta a 35 estudiantes)
+       Una sección puede tener id y class al mismo tiempo.
+       =================================================================== -->
+  <section id="investigacion" class="research-section">
+
+    <div class="section-head">
+      <div class="eyebrow">04 · Investigación escolar</div>
+      <h2>Pregunta de investigación</h2>
+      <p class="research-question">¿Cuál es el nivel de conciencia de los estudiantes de grado noveno del Colegio Alfonso López Michelsen sobre la contaminación del aire?</p>
+      <!-- <strong> = texto en negrita e importante -->
+      <p>Para acercarnos a esta pregunta, se realizó una encuesta a <strong>35 personas</strong> sobre las fuentes de contaminación que reconocen, los posibles efectos del polvo y los vapeadores, sus conocimientos sobre prevención y las soluciones que proponen.</p>
+    </div>
+
+    <!-- Los 3 datos más importantes, en cajas oscuras.
+         <strong> = el número grande, <span> = la frase, <small> = el detalle en letra pequeña -->
+    <div class="research-intro">
+      <div class="research-stat">
+        <strong>68,6%</strong>
+        <span>El polvo es la preocupación ambiental más mencionada.</span>
+        <small>24 personas identificaron el polvo del parqueadero de buses del SITP.</small>
+      </div>
+      <div class="research-stat">
+        <strong>65,7%</strong>
+        <span>Reconoce que falta información sobre prevención.</span>
+        <small>23 personas se consideran poco o nada informadas.</small>
+      </div>
+      <div class="research-stat">
+        <strong>62,9%</strong>
+        <span>Reconoce el riesgo de los vapeadores.</span>
+        <small>22 personas consideran que pueden afectar la calidad del aire y la salud.</small>
+      </div>
+    </div>
+
+    <div class="section-head research-subhead">
+      <div class="eyebrow">Resultados de la encuesta</div>
+      <h2>¿Qué respondieron?</h2>
+      <p>Los porcentajes se calcularon sobre un total de 35 respuestas. Las cifras pueden variar levemente por redondeo.</p>
+    </div>
+
+    <!-- ---------------------------------------------------------------
+         TABLAS DE LA ENCUESTA
+         Cómo se arma una tabla en HTML:
+           <table>  = la tabla completa
+           <thead>  = la parte de arriba (encabezados)
+           <tbody>  = el cuerpo (los datos)
+           <tr>     = una FILA (table row)
+           <th>     = celda de ENCABEZADO (en negrita)
+           <td>     = celda normal con un dato (table data)
+         Porcentaje = personas ÷ 35 × 100.  Ej.: 10 ÷ 35 × 100 = 28,6%
+         --------------------------------------------------------------- -->
+    <div class="survey-grid">
+
+      <!-- Pregunta 1 -->
+      <article class="survey-card">
+        <h3>1. ¿Cuánto conocen sobre los efectos del polvo y las emisiones?</h3>
+        <table class="survey-table">
+          <thead>
+            <tr><th>Respuesta</th><th>Personas</th><th>Porcentaje</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Mucho</td><td>10</td><td>28,6%</td></tr>
+            <tr><td>Algo</td><td>11</td><td>31,4%</td></tr>
+            <tr><td>Poco</td><td>10</td><td>28,6%</td></tr>
+            <tr><td>Nada</td><td>4</td><td>11,4%</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- Pregunta 2 -->
+      <article class="survey-card">
+        <h3>2. ¿Los vapeadores pueden afectar el aire y la salud?</h3>
+        <table class="survey-table">
+          <thead>
+            <tr><th>Respuesta</th><th>Personas</th><th>Porcentaje</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sí</td><td>22</td><td>62,9%</td></tr>
+            <tr><td>No estoy seguro</td><td>10</td><td>28,6%</td></tr>
+            <tr><td>No</td><td>3</td><td>8,6%</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- Pregunta 3 (con una cajita de dato extra al final) -->
+      <article class="survey-card">
+        <h3>3. ¿Qué tan informados están sobre la prevención?</h3>
+        <table class="survey-table">
+          <thead>
+            <tr><th>Respuesta</th><th>Personas</th><th>Porcentaje</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Muy informados</td><td>1</td><td>2,9%</td></tr>
+            <tr><td>Algo informados</td><td>11</td><td>31,4%</td></tr>
+            <tr><td>Poco informados</td><td>15</td><td>42,9%</td></tr>
+            <tr><td>Nada informados</td><td>8</td><td>22,9%</td></tr>
+          </tbody>
+        </table>
+        <p class="survey-insight">En conjunto, 23 personas (65,7%) dicen estar poco o nada informadas.</p>
+      </article>
+
+      <!-- Pregunta 4 -->
+      <article class="survey-card">
+        <h3>4. ¿Qué tipo de contaminación identificaron?</h3>
+        <table class="survey-table">
+          <thead>
+            <tr><th>Respuesta</th><th>Personas</th><th>Porcentaje</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Polvo del parqueadero del SITP</td><td>24</td><td>68,6%</td></tr>
+            <tr><td>Emisiones de los buses</td><td>6</td><td>17,1%</td></tr>
+            <tr><td>Humo de vapeadores</td><td>3</td><td>8,6%</td></tr>
+            <tr><td>Ninguna de las anteriores</td><td>2</td><td>5,7%</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <!-- Pregunta 5: tiene la clase extra "survey-card-wide" para ocupar todo el ancho -->
+      <article class="survey-card survey-card-wide">
+        <h3>5. ¿Qué soluciones propusieron?</h3>
+        <table class="survey-table">
+          <thead>
+            <tr><th>Propuesta</th><th>Personas</th><th>Porcentaje</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reciclaje, limpieza y siembra de árboles</td><td>7</td><td>20,0%</td></tr>
+            <tr><td>No saben qué proponer</td><td>7</td><td>20,0%</td></tr>
+            <tr><td>Trasladar o retirar el parqueadero</td><td>6</td><td>17,1%</td></tr>
+            <tr><td>Pavimentar la zona del parqueadero</td><td>5</td><td>14,3%</td></tr>
+            <tr><td>Educación y campañas de concientización</td><td>5</td><td>14,3%</td></tr>
+            <tr><td>Otras propuestas</td><td>5</td><td>14,3%</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </div>
+
+    <!-- Análisis y conclusión de la encuesta -->
+    <div class="research-conclusion">
+      <div class="eyebrow">Análisis de los resultados</div>
+      <h3>¿Qué nos dicen estas respuestas?</h3>
+      <p>Los resultados muestran que el polvo del parqueadero de buses del SITP es la preocupación más visible para las personas encuestadas. Aunque una mayoría reconoce que los vapeadores pueden afectar la calidad del aire y la salud, también se observa una necesidad de fortalecer la información sobre la prevención: casi dos de cada tres participantes se consideran poco o nada informados sobre este tema.</p>
+      <p>Las propuestas reflejan interés por acciones comunitarias, como reciclar, limpiar y sembrar árboles. Sin embargo, varias personas no saben qué solución proponer, lo que demuestra la importancia de realizar actividades de educación ambiental en el colegio y en la comunidad.</p>
+      <p><strong>Conclusión:</strong> los estudiantes reconocen algunas fuentes de contaminación, especialmente el polvo y las emisiones relacionadas con el transporte, pero es necesario reforzar sus conocimientos sobre los efectos y las formas de prevención para convertir esa preocupación en acciones concretas.</p>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       SECCIÓN 05: SOLUCIONES
+       Igual que "Causas", pero con un ✓ en vez de número.
+       =================================================================== -->
+  <section id="soluciones" class="solution">
+    <div class="section-head">
+      <div class="eyebrow">05 · ¿Qué podemos hacer?</div>
+      <h2>Soluciones para una Bosa más limpia</h2>
+      <p>La recuperación ambiental requiere trabajo conjunto entre habitantes, comercios, empresas y entidades públicas.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Separar y disponer bien los residuos</h3>
+        <p>Clasificar aprovechables, orgánicos y no aprovechables; respetar horarios de recolección y llevar escombros y muebles a canales autorizados.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Proteger ríos y humedales</h3>
+        <p>No arrojar basura, aceites ni químicos a los desagües. Participar en jornadas de limpieza organizadas y respetar las zonas de protección.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Reducir la contaminación del aire</h3>
+        <p>Caminar, usar bicicleta o transporte público cuando sea posible; mantener los vehículos en buen estado y evitar las quemas.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Sembrar y cuidar árboles</h3>
+        <p>Apoyar iniciativas de arborización con especies apropiadas, cuidar los árboles existentes y recuperar espacios verdes comunitarios.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Exigir responsabilidad ambiental</h3>
+        <p>Reportar puntos críticos, vertimientos y disposición ilegal de residuos ante las autoridades competentes, con ubicación y evidencia cuando sea seguro.</p>
+      </article>
+
+      <article class="card">
+        <div class="number">✓</div>
+        <h3>Educar y trabajar en comunidad</h3>
+        <p>Promover campañas en colegios, hogares y comercios para crear hábitos sostenibles y mantener los espacios comunes limpios.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- ===================================================================
+       FRANJA VERDE LIMÓN: EL COMPROMISO
+       El botón lleva a la sección de fuentes (#fuentes).
+       =================================================================== -->
+  <div class="pledge">
+    <div class="eyebrow">El cambio empieza en el barrio</div>
+    <h2>Una Bosa limpia no es un sueño: es una responsabilidad compartida.</h2>
+    <p>Cuidar el agua, el aire y las zonas verdes significa cuidar nuestra salud y el futuro de las próximas generaciones.</p>
+    <a class="cta" href="#fuentes" style="background:#173f35">Conoce las fuentes del trabajo ↓</a>
+  </div>
+
+
+  <!-- ===================================================================
+       SECCIÓN 06: JUEGO "ECO VUELA"
+       Aquí solo está la "caja" del juego. Lo que lo hace funcionar
+       está en el archivo js/juego.js
+       =================================================================== -->
+  <section id="juego" class="eco-game-section">
+    <div class="section-head">
+      <div class="eyebrow">06 · Juego interactivo</div>
+      <h2>Eco Vuela: ¡protege al pajarito!</h2>
+      <p>Ayuda al ave a volar por un cielo más limpio. Esquiva los vapeadores y el humo para conseguir la mayor puntuación.</p>
+    </div>
+
+    <!-- El marco verde oscuro del juego -->
+    <div class="eco-game-shell">
+
+      <!-- Barra de arriba. <b id="ecoScore"> es donde el JavaScript escribe los puntos -->
+      <div class="eco-game-top">
+        <span>🌱 ECO VUELA</span>
+        <span class="eco-score">Puntos: <b id="ecoScore">0</b></span>
+      </div>
+
+      <div class="eco-canvas-wrap">
+        <!-- <canvas> = un LIENZO en blanco de 800 x 520 donde el JavaScript
+             dibuja el juego (el pájaro, los obstáculos, el fondo...).
+             aria-label = descripción para lectores de pantalla -->
+        <canvas id="ecoCanvas" width="800" height="520" aria-label="Juego Eco Vuela"></canvas>
+
+        <!-- Capa que aparece ENCIMA del juego al inicio y cuando pierdes.
+             El JavaScript la esconde o la muestra. -->
+        <div id="ecoOverlay" class="eco-overlay">
+          <div class="eco-overlay-card">
+            <div class="eco-big-icon">🐦</div>
+            <h3 id="ecoOverlayTitle">¡El planeta necesita tu ayuda!</h3>
+            <p id="ecoOverlayText">Esquiva el humo y los vapeadores. Cada obstáculo superado suma un punto.</p>
+            <!-- <button> = botón. type="button" = botón normal (no envía formularios) -->
+            <button id="ecoStart" type="button">▶ Iniciar juego</button>
+            <small>Controles: barra espaciadora, ↑, clic o toque para volar.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de abajo: controles y récord (el JavaScript escribe el récord en <b id="ecoBest">) -->
+      <div class="eco-game-bottom">
+        <span>⌨️ Espacio / ↑</span>
+        <span>📱 Toca la pantalla para volar</span>
+        <span>🏆 Récord: <b id="ecoBest">0</b></span>
+      </div>
+    </div>
+
+    <p class="eco-game-note">Este juego fue adaptado a formato web usando los personajes y elementos gráficos del proyecto Scratch enviado.</p>
+  </section>
+
+
+  <!-- ===================================================================
+       SECCIÓN 07: FUENTES (de dónde salió la información)
+       <ul> = lista con viñetas. <li> = cada elemento de la lista.
+       target="_blank" = el enlace se abre en una pestaña NUEVA.
+       rel="noopener" = medida de seguridad al abrir pestañas nuevas.
+       =================================================================== -->
+  <section id="fuentes" class="sources">
+    <div class="eyebrow">07 · Para consultar</div>
+    <h2>Fuentes de información e imágenes</h2>
+    <p>Este trabajo reúne información de diagnósticos ambientales y publicaciones periodísticas sobre Bosa y la cuenca del río Tunjuelo. Algunas imágenes ilustran la problemática en el río Tunjuelo y sus alrededores en Bogotá; no todas corresponden al mismo punto de la localidad.</p>
+    <ul>
+      <li><a href="https://www.ambientebogota.gov.co/documents/10184/679250/Diagn%C3%B3stico%2BAmbiental%2BLocal%2BBosa%2B.pdf/97075adb-cb48-4362-b748-dbf9602296f8?version=1.0" target="_blank" rel="noopener">Secretaría Distrital de Ambiente – Diagnóstico Ambiental Local de Bosa.</a></li>
+      <li><a href="https://oab.ambientebogota.gov.co/wp-content/uploads/dlm_uploads/2017/08/12.-DIAGN.-AMB.-BOSA-en.020.pdf" target="_blank" rel="noopener">Observatorio Ambiental de Bogotá – Diagnóstico ambiental de Bosa.</a></li>
+      <li><a href="https://new.ambientebogota.gov.co/nosotros/planeacion-ambiental/planes-ambientales/plan-aire" target="_blank" rel="noopener">Secretaría Distrital de Ambiente – Plan Aire 2030 y zona suroccidental.</a></li>
+      <li><a href="https://bogota.gov.co/mi-ciudad/ambiente/rio-tunjuelo-sacaron-270-toneladas-de-residuos" target="_blank" rel="noopener">Bogotá.gov.co – Jornada de retiro de residuos del río Tunjuelo.</a></li>
+      <li><a href="https://citytv.eltiempo.com/noticias/medio-ambiente/riesgo-en-el-rio-tunjuelito-basura-acumulada-podria-causar-grave-emergencia_79914" target="_blank" rel="noopener">City TV – Residuos acumulados en el río Tunjuelito (imagen).</a></li>
+      <li><a href="https://www.eltiempo.com/bogota/contaminacion-del-rio-tunjuelo-nueva-jornada-de-limpieza-de-la-empresa-de-acueducto-378892" target="_blank" rel="noopener">El Tiempo – Jornada de limpieza del río Tunjuelo (imagen).</a></li>
+      <li><a href="https://caracol.com.co/2025/09/10/en-bogota-habitantes-haran-parte-del-proceso-de-recuperacion-del-rio-tunjuelito/" target="_blank" rel="noopener">Caracol Radio – Recuperación del río Tunjuelito (imagen).</a></li>
+      <li><a href="https://www.semana.com/sostenible/articulo/habitantes-de-bogota-crean-un-bosque-dentro-de-la-ciudad-en-donde-queda/202206/" target="_blank" rel="noopener">Semana – Recuperación de un espacio verde en Bosa (imagen).</a></li>
+    </ul>
+  </section>
+
+
+  <!-- ===================================================================
+       PIE DE PÁGINA (footer): lo último de la página, con el autor
+       =================================================================== -->
+  <footer>
+    <strong>Trabajo escolar · Contaminación ambiental en Bosa</strong>
+    <p>Realizado por <b>Jhoel Steven Alfonso Rodriguez</b></p>
+    <p>🌱 Cuidar nuestro territorio es cuidar nuestra vida.</p>
+  </footer>
+
+
+  <!-- Conecta el archivo de JavaScript que hace funcionar el juego.
+       Va al FINAL del body para que primero cargue todo el HTML. -->
+  <script src="js/juego.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+/* =====================================================================
+   ESTILOS.CSS  →  El "maquillaje" de la página
+   ---------------------------------------------------------------------
+   El HTML dice QUÉ hay en la página (títulos, textos, fotos...).
+   El CSS dice CÓMO se ve: colores, tamaños, letras, espacios, posición.
+
+   Cómo se lee una regla de CSS:
+
+       selector { propiedad: valor; }
+
+       - selector  → a QUÉ parte de la página le aplicamos el estilo.
+                     "nav" = la etiqueta <nav>
+                     ".card" = todo lo que tenga class="card"  (el punto = clase)
+                     "#ecoCanvas" = lo que tenga id="ecoCanvas" (el # = id)
+       - propiedad → QUÉ cambiamos (color, tamaño, margen...)
+       - valor     → CÓMO lo dejamos (verde, 20px, centrado...)
+
+   Unidades que vas a ver:
+       px  = píxeles (puntitos de la pantalla)
+       rem = tamaño relativo a la letra normal (1rem ≈ 16px)
+       %   = porcentaje del espacio disponible
+       vw  = porcentaje del ancho de la pantalla (5vw = 5% del ancho)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. VARIABLES DE COLOR
+   ---------------------------------------------------------------------
+   :root es la raíz de toda la página. Aquí guardamos los colores
+   con un nombre (empiezan con --) para no repetir el código del color.
+   Luego se usan así:  color: var(--green);
+   Si queremos cambiar el verde de TODA la página, se cambia solo aquí.
+   ===================================================================== */
+:root {
+  --ink: #17352f;    /* verde casi negro: el color del texto principal */
+  --green: #1e6b52;  /* verde principal de la página */
+  --mint: #dff1e8;   /* verde menta clarito */
+  --lime: #c8e6a0;   /* verde limón suave */
+  --cream: #f7f7ef;  /* color crema del fondo */
+  --muted: #63736c;  /* gris verdoso para textos secundarios */
+  --orange: #e78b4a; /* naranja (color de apoyo) */
+}
+
+
+/* =====================================================================
+   2. REGLAS GENERALES (para toda la página)
+   ===================================================================== */
+
+/* El * significa "TODOS los elementos".
+   box-sizing: border-box hace que el borde y el relleno queden DENTRO
+   del tamaño de la caja, así es más fácil calcular medidas. */
+* {
+  box-sizing: border-box;
+}
+
+/* Cuando se hace clic en un enlace del menú, la página baja suavecito
+   en vez de saltar de golpe. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* body = todo el cuerpo visible de la página */
+body {
+  margin: 0;                          /* quita el borde blanco que trae el navegador */
+  background: var(--cream);           /* fondo color crema */
+  color: var(--ink);                  /* color del texto */
+  font-family: 'DM Sans', sans-serif; /* tipo de letra (viene de Google Fonts) */
+  line-height: 1.65;                  /* espacio entre renglones */
+}
+
+
+/* =====================================================================
+   3. MENÚ DE NAVEGACIÓN (la barra de arriba)
+   ===================================================================== */
+nav {
+  position: sticky;   /* "pegajoso": se queda fijo arriba al bajar la página */
+  top: 0;             /* pegado al borde de arriba */
+  z-index: 10;        /* queda ENCIMA de las otras cosas (como una capa) */
+  background: rgba(247, 247, 239, .94); /* crema casi transparente */
+  backdrop-filter: blur(12px);          /* desenfoca lo que pasa por detrás */
+  border-bottom: 1px solid #dce6dc;     /* línea delgada abajo */
+  display: flex;                        /* pone los hijos uno al lado del otro */
+  justify-content: space-between;       /* logo a la izquierda, enlaces a la derecha */
+  align-items: center;                  /* centrados de arriba a abajo */
+  padding: 14px max(5vw, 22px);         /* relleno: 14px arriba/abajo, a los lados el mayor entre 5% de pantalla o 22px */
+}
+
+/* El nombre "🌿 BOSA RESPIRA" */
+.brand {
+  font-weight: 700;        /* letra gruesa (negrita) */
+  letter-spacing: .04em;   /* letras un poquito separadas */
+  color: var(--green);
+}
+
+/* Los enlaces del menú */
+nav a {
+  color: var(--ink);
+  text-decoration: none;   /* quita el subrayado de los enlaces */
+  font-size: .9rem;
+  margin-left: 18px;       /* espacio entre un enlace y otro */
+  font-weight: 600;
+}
+
+/* :hover = cuando el mouse pasa por encima */
+nav a:hover {
+  color: var(--green);
+}
+
+
+/* =====================================================================
+   4. PORTADA (hero) — lo primero que se ve
+   ===================================================================== */
+.hero {
+  min-height: 610px;                      /* alto mínimo */
+  display: grid;                          /* grid = cuadrícula */
+  grid-template-columns: 1.05fr .95fr;    /* 2 columnas: texto | foto (fr = fracción del espacio) */
+  align-items: center;
+  gap: 35px;                              /* espacio entre las columnas */
+  padding: 70px max(7vw, 24px);
+  background: linear-gradient(120deg, #e8f3e8 0%, #f7f7ef 65%); /* degradado de verde clarito a crema */
+}
+
+/* Texto pequeñito en MAYÚSCULAS que va encima de los títulos */
+.eyebrow {
+  color: var(--green);
+  font-weight: 700;
+  text-transform: uppercase;  /* convierte el texto a mayúsculas */
+  letter-spacing: .16em;
+  font-size: .78rem;
+}
+
+/* Todos los títulos usan la letra elegante "Playfair Display" */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.12;
+}
+
+/* El título gigante de la portada.
+   clamp(mínimo, ideal, máximo): el tamaño cambia según la pantalla
+   pero nunca baja de 3rem ni sube de 5.8rem. */
+h1 {
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  margin: 15px 0 20px;
+  letter-spacing: -.04em;
+}
+
+/* La parte "respirar mejor." del título, en verde */
+h1 span {
+  color: var(--green);
+}
+
+.hero p {
+  font-size: 1.13rem;
+  max-width: 560px;   /* para que el párrafo no quede demasiado ancho */
+  color: #52645c;
+}
+
+/* .cta = "Call To Action" = el botón verde redondeado */
+.cta {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 999px;   /* bordes MUY redondos = forma de pastilla */
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.cta:hover {
+  background: #124a39;    /* se oscurece al pasar el mouse */
+}
+
+/* La foto de la portada */
+.hero-photo {
+  position: relative;     /* necesario para poder ubicar la notita blanca encima */
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 440px;
+  object-fit: cover;      /* recorta la foto para que llene el espacio sin deformarse */
+  border-radius: 28px 110px 28px 28px; /* esquinas redondeadas (la de arriba-derecha más grande) */
+  box-shadow: 0 22px 55px #17352f25;   /* sombra suave debajo */
+}
+
+/* La notita blanca "🌎 Nuestro entorno necesita cuidado..." */
+.photo-note {
+  position: absolute;     /* se ubica libremente encima de la foto */
+  bottom: -18px;          /* un poquito por fuera, abajo */
+  left: -18px;            /* un poquito por fuera, a la izquierda */
+  background: white;
+  padding: 15px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px #17352f18;
+  font-size: .88rem;
+}
+
+
+/* =====================================================================
+   5. SECCIONES Y ENCABEZADOS DE SECCIÓN
+   ===================================================================== */
+
+/* Todas las <section> tienen el mismo relleno */
+section {
+  padding: 85px max(7vw, 24px);
+}
+
+/* El bloque de título de cada sección (va centrado) */
+.section-head {
+  max-width: 720px;
+  margin: 0 auto 42px;    /* "auto" a los lados = centrado */
+  text-align: center;
+}
+
+.section-head h2 {
+  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  margin: 12px 0;
+}
+
+.section-head p {
+  color: var(--muted);
+}
+
+/* Franja verde oscura "¿Qué está dañando nuestro ambiente?" */
+.question {
+  background: #173f35;
+  color: white;
+  text-align: center;
+  padding: 72px 24px;
+}
+
+.question h2 {
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  max-width: 850px;
+  margin: 10px auto 18px;
+}
+
+.question p {
+  max-width: 760px;
+  margin: auto;
+  color: #d7e8df;
+  font-size: 1.08rem;
+}
+
+
+/* =====================================================================
+   6. TARJETAS (cards) — las cajitas blancas de causas y soluciones
+   ===================================================================== */
+
+/* .grid organiza las tarjetas en 3 columnas iguales */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* repetir 3 veces "1 fracción" = 3 columnas iguales */
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e4e9df;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 25px #17352f08;
+}
+
+/* El cuadrito con el número (1, 2, 3...) o el ✓ */
+.number {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--mint);
+  color: var(--green);
+  display: grid;
+  place-items: center;   /* centra el número dentro del cuadrito */
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-size: 1.35rem;
+  margin: 0 0 10px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .96rem;
+}
+
+
+/* =====================================================================
+   7. GALERÍA DE FOTOS (sección "El problema")
+   ===================================================================== */
+
+/* 2 columnas: una foto grande a la izquierda y dos pequeñas a la derecha */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 22px;
+  align-items: stretch;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+/* La columna de la derecha con las 2 fotos una encima de la otra */
+.photo-stack {
+  display: grid;
+  gap: 22px;
+}
+
+.photo-stack img {
+  height: 250px;
+  min-height: 0;
+}
+
+/* El textico debajo de cada foto (pie de foto) */
+.caption {
+  font-size: .82rem;
+  color: var(--muted);
+  margin: 8px 4px 0;
+}
+
+
+/* =====================================================================
+   8. SECCIÓN CONSECUENCIAS (impact)
+   ===================================================================== */
+.impact {
+  background: #eaf2e8;
+}
+
+/* Aquí las tarjetas van en 2 columnas en vez de 3 */
+.impact .grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Emoji a la izquierda y texto a la derecha */
+.impact .card {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.emoji {
+  font-size: 1.8rem;
+}
+
+
+/* =====================================================================
+   9. SOLUCIONES, COMPROMISO, FUENTES Y PIE DE PÁGINA
+   ===================================================================== */
+.solution {
+  background: #f0f5e9;
+}
+
+/* Las tarjetas de soluciones tienen una raya verde arriba */
+.solution .card {
+  border-top: 4px solid var(--green);
+}
+
+/* Franja verde limón "Una Bosa limpia no es un sueño..." */
+.pledge {
+  background: var(--lime);
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.pledge h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  max-width: 800px;
+  margin: 10px auto;
+}
+
+.pledge p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+
+/* Lista de fuentes (de dónde sacamos la información) */
+.sources {
+  background: #fff;
+  padding: 60px max(7vw, 24px);
+}
+
+.sources h2 {
+  font-size: 2rem;
+}
+
+.sources li {
+  margin: 10px 0;
+  color: var(--muted);
+}
+
+.sources a {
+  color: var(--green);
+  overflow-wrap: anywhere;   /* deja partir los enlaces largos para que no se salgan */
+}
+
+/* footer = pie de página (lo último de abajo) */
+footer {
+  background: #14382f;
+  color: #e8f3e8;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+footer strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+}
+
+footer p {
+  margin: 7px 0;
+  color: #c5d8ce;
+  font-size: .92rem;
+}
+
+
+/* =====================================================================
+   10. INVESTIGACIÓN (la encuesta)
+   ===================================================================== */
+.research-section {
+  background: #f7f7ef;
+}
+
+/* La caja verde con la pregunta de investigación */
+.research-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.35rem, 2.7vw, 2rem);
+  line-height: 1.35;
+  color: #1e6b52;
+  background: #e2f0e5;
+  border-left: 5px solid #1e6b52;   /* raya verde a la izquierda */
+  border-radius: 14px;
+  padding: 22px 25px;
+  text-align: left;
+  margin: 25px auto;
+  max-width: 850px;
+}
+
+/* Las 3 cajas oscuras con los porcentajes grandes */
+.research-intro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 1100px;
+  margin: 35px auto 70px;
+}
+
+.research-stat {
+  background: #173f35;
+  color: white;
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;   /* los elementos van uno DEBAJO del otro */
+  gap: 7px;
+}
+
+/* El número grande (68,6%, etc.) */
+.research-stat strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.7rem;
+  color: #c8e6a0;
+  line-height: 1;
+}
+
+.research-stat span {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.research-stat small {
+  color: #d4e5dc;
+  line-height: 1.45;
+}
+
+.research-subhead {
+  margin-bottom: 30px;
+}
+
+/* Las tarjetas con las tablas de la encuesta: 2 columnas */
+.survey-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.survey-card {
+  background: white;
+  border: 1px solid #e1e9df;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 25px #17352f08;
+  min-width: 0;
+}
+
+.survey-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 18px;
+}
+
+/* La tarjeta de la pregunta 5 ocupa todo el ancho (de la columna 1 a la última) */
+.survey-card-wide {
+  grid-column: 1 / -1;
+}
+
+/* Las tablas */
+.survey-table {
+  width: 100%;
+  border-collapse: collapse;   /* junta los bordes de las celdas en una sola línea */
+  font-size: .93rem;
+}
+
+/* th = celda de encabezado (Respuesta | Personas | Porcentaje) */
+.survey-table th {
+  text-align: left;
+  background: #e7f1e8;
+  color: #1e6b52;
+  font-weight: 700;
+}
+
+/* td = celda normal */
+.survey-table th,
+.survey-table td {
+  padding: 11px 9px;
+  border-bottom: 1px solid #e7ece5;
+}
+
+/* :nth-child(2) y (3) = la 2.ª y 3.ª columna (los números) → alineadas a la derecha */
+.survey-table td:nth-child(2),
+.survey-table td:nth-child(3),
+.survey-table th:nth-child(2),
+.survey-table th:nth-child(3) {
+  text-align: right;
+  white-space: nowrap;   /* que el número no se parta en dos renglones */
+}
+
+/* La última fila no lleva línea abajo */
+.survey-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Cajita verde con un dato importante debajo de una tabla */
+.survey-insight {
+  background: #eef5e9;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #315b45;
+  font-weight: 600;
+  font-size: .9rem;
+  margin: 15px 0 0;
+}
+
+/* Caja final con el análisis y la conclusión */
+.research-conclusion {
+  max-width: 1100px;
+  margin: 35px auto 0;
+  padding: 30px;
+  background: #e2f0e5;
+  border-radius: 20px;
+}
+
+.research-conclusion h3 {
+  font-size: 1.8rem;
+  margin: 8px 0 14px;
+}
+
+.research-conclusion p {
+  color: #42584d;
+}
+
+
+/* =====================================================================
+   11. JUEGO "ECO VUELA"
+   ===================================================================== */
+.eco-game-section {
+  background: #eaf3e9;
+}
+
+/* El "marco" verde oscuro alrededor del juego */
+.eco-game-shell {
+  max-width: 900px;
+  margin: auto;
+  background: #153d34;
+  padding: 14px;
+  border-radius: 24px;
+  box-shadow: 0 24px 55px #17352f25;
+}
+
+/* Las barras de arriba (título y puntos) y de abajo (controles y récord) */
+.eco-game-top,
+.eco-game-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  color: #eaf5eb;
+  padding: 9px 12px;
+  font-weight: 700;
+  font-size: .9rem;
+  flex-wrap: wrap;   /* si no caben, bajan a otro renglón */
+}
+
+/* La caja que contiene el lienzo del juego */
+.eco-canvas-wrap {
+  position: relative;
+  overflow: hidden;   /* esconde lo que se salga de la caja */
+  border-radius: 15px;
+  background: #80cbd0;
+}
+
+/* El canvas (lienzo) donde se dibuja el juego */
+#ecoCanvas {
+  display: block;
+  width: 100%;       /* se estira al ancho de la caja */
+  height: auto;      /* y el alto se ajusta solo para no deformarse */
+  touch-action: manipulation;   /* en celular, evita el zoom al tocar dos veces */
+}
+
+/* La capa oscura que aparece encima del juego con el botón "Iniciar" */
+.eco-overlay {
+  position: absolute;
+  inset: 0;              /* ocupa TODO el espacio del juego (arriba, abajo, izq. y der. en 0) */
+  display: grid;
+  place-items: center;   /* la tarjeta queda en el centro */
+  padding: 16px;
+  background: #123b3280; /* verde oscuro semitransparente */
+}
+
+/* Cuando el JavaScript le pone la clase "hidden", la capa desaparece */
+.eco-overlay.hidden {
+  display: none;
+}
+
+/* La tarjeta blanca del centro (título, texto y botón) */
+.eco-overlay-card {
+  max-width: 430px;
+  text-align: center;
+  background: #fffdf3;
+  border-radius: 22px;
+  padding: 25px 28px;
+  box-shadow: 0 15px 45px #102b2570;
+}
+
+.eco-overlay-card h3 {
+  font-size: 1.8rem;
+  margin: 5px 0 10px;
+}
+
+.eco-overlay-card p {
+  color: #5d6d64;
+  margin: 0 0 16px;
+}
+
+.eco-big-icon {
+  font-size: 2.6rem;
+}
+
+/* El botón "▶ Iniciar juego" */
+.eco-overlay-card button {
+  border: 0;
+  background: #1e6b52;
+  color: white;
+  border-radius: 999px;
+  padding: 13px 24px;
+  font: 700 1rem 'DM Sans', sans-serif;  /* negrita, tamaño 1rem, letra DM Sans */
+  cursor: pointer;   /* el mouse se vuelve una manito */
+}
+
+.eco-overlay-card button:hover {
+  background: #124a39;
+}
+
+.eco-overlay-card small {
+  display: block;
+  color: #68776e;
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+/* La nota debajo del juego */
+.eco-game-note {
+  text-align: center;
+  color: #63736c;
+  font-size: .85rem;
+  margin: 16px auto 0;
+}
+
+
+/* =====================================================================
+   12. DISEÑO ADAPTABLE (responsive) — para tablets y celulares
+   ---------------------------------------------------------------------
+   @media (max-width: 850px) significa:
+   "SOLO si la pantalla mide 850 píxeles de ancho o menos, aplica esto".
+   Así la página se reorganiza y se ve bien en un celular.
+   ===================================================================== */
+
+/* Tablets y pantallas medianas (850px o menos) */
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding-top: 55px; } /* portada en 1 sola columna */
+  .hero-photo img { height: 330px; }
+  .grid { grid-template-columns: 1fr 1fr; }                /* tarjetas en 2 columnas */
+  .photo-grid { grid-template-columns: 1fr; }
+  .photo-stack { grid-template-columns: 1fr 1fr; }
+  .photo-stack img { height: 200px; }
+  .impact .grid { grid-template-columns: 1fr; }
+}
+
+/* Pantallas medianas-pequeñas (760px o menos): la encuesta en 1 columna */
+@media (max-width: 760px) {
+  .research-intro { grid-template-columns: 1fr; margin-bottom: 50px; }
+  .survey-grid { grid-template-columns: 1fr; }
+  .survey-card-wide { grid-column: auto; }
+  .survey-card { padding: 17px; }
+  .survey-table { font-size: .84rem; }
+  .survey-table th,
+  .survey-table td { padding: 9px 5px; }
+}
+
+/* Celulares (560px o menos) */
+@media (max-width: 560px) {
+  nav { align-items: flex-start; gap: 8px; flex-direction: column; } /* menú: logo arriba, enlaces abajo */
+  nav a { margin: 0 12px 0 0; font-size: .8rem; }
+  .hero { padding: 45px 22px; }
+  .grid { grid-template-columns: 1fr; }                    /* tarjetas en 1 sola columna */
+  section { padding: 62px 22px; }
+  .photo-stack { grid-template-columns: 1fr; }
+  .photo-stack img { height: 230px; }
+  .photo-note { left: 8px; bottom: -25px; }
+
+  /* El juego en celular */
+  .eco-game-shell { padding: 8px; border-radius: 16px; }
+  .eco-game-top,
+  .eco-game-bottom { font-size: .78rem; }
+  .eco-overlay-card { padding: 17px; }
+  .eco-overlay-card h3 { font-size: 1.35rem; }
+}
